@@ -4,7 +4,7 @@ from flask import escape
 from gen import generate_random_tweet
 from random import randrange
 
-def hello_http(request):
+def tweet_http(request):
     """HTTP Cloud Function.
     Args:
         request (flask.Request): The request object.
@@ -15,8 +15,13 @@ def hello_http(request):
         <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>.
     """
     request_json = request.get_json(silent=True)
+    request_args = request.args
 
     if request_json and 'length' in request_json:
-        return generate_random_tweet(length=request_json['length'], proper_caps=True)
+        length = request_json['length']
+    elif request_args and 'name' in request_args:
+        length = request_args['length']
+    else:
+        length = randrange(1,3)
 
-    return generate_random_tweet(length=randrange(1,3), proper_caps=True)
+    return generate_random_tweet(length, proper_caps=True, tweets_loaded=True)
