@@ -14,6 +14,22 @@ def tweet_http(request):
         Response object using `make_response`
         <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>.
     """
+    if request.method == 'OPTIONS':
+        headers = {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': ['GET','POST'],
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Max-Age': '3600'
+        }
+
+        return ('', 204, headers)
+
+    # Set CORS headers for the main request
+    # Change to website when complete
+    headers = {
+        'Access-Control-Allow-Origin': '*'
+    }
+
     request_json = request.get_json(silent=True)
     request_args = request.args
 
@@ -24,4 +40,4 @@ def tweet_http(request):
     else:
         length = randrange(1,3)
 
-    return generate_random_tweet(length, proper_caps=True, tweets_loaded=True)
+    return (generate_random_tweet(length, proper_caps=True, tweets_loaded=True), 200, headers)
