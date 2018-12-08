@@ -1,5 +1,38 @@
 import pandas as pd
-import json, random, os
+import json, random, os, re
+
+def generate_random_tweet(length=1, proper_caps=False, tweets_loaded=False):
+    '''
+    Using the document generated in the initialization step, generate a tweet
+    by executing a random walk on the markov chain.
+    '''
+    if not tweets_loaded or not os.path.exists("data_out.json"):
+        _generate_json_doc()
+
+    json_tree = _load_json_doc()
+
+    # Start with Empty String
+    tweet = ""
+    key = random.choice(list(json_tree.keys()))
+    tweet += key.split(' ')[0] + ' '
+    sentences = 0
+    while sentences < length:
+        tweet += key.split(' ')[1] + ' '
+        try:
+            value = random.choice(json_tree[key])
+        except KeyError as e:
+            key = random.choice(list(json_tree.keys()))
+        else:
+            word1, word2 = key.split(" ")
+            key = ' '.join([word2, value])
+
+        if  tweet[-2] in ".?!":
+            sentences += 1
+
+    if proper_caps:
+        return _proper_capitalization(tweet)
+    else:
+        return tweet
 
 def _generate_json_doc():
     '''
@@ -50,40 +83,6 @@ def _load_json_doc():
     with open("data_out.json") as json_doc:
         json_tree = json.load(json_doc)
     return json_tree
-
-def generate_random_tweet(length=1, proper_caps=False, tweets_loaded=False):
-    '''
-    Using the document generated in the initialization step, generate a tweet
-    by executing a random walk on the markov chain.
-    '''
-    if not tweets_loaded or os:
-        _generate_json_doc()
-
-    json_tree = _load_json_doc()
-
-    # Start with Empty String
-    tweet = ""
-    key = random.choice(list(json_tree.keys()))
-    tweet += key.split(' ')[0] + ' '
-    sentences = 0
-    while sentences < length:
-        tweet += key.split(' ')[1] + ' '
-        try:
-            value = random.choice(json_tree[key])
-        except KeyError as e:
-            key = random.choice(list(json_tree.keys()))
-        else:
-            word1, word2 = key.split(" ")
-            key = ' '.join([word2, value])
-
-        if  tweet[-2] in ".?!":
-            sentences += 1
-
-    if proper_caps:
-        return _proper_capitalization(tweet)
-    else:
-        return tweet
-
 
 def _proper_capitalization(sentence):
     '''
