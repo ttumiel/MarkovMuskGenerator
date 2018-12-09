@@ -16,7 +16,7 @@ def generate_random_tweet(length=1, proper_caps=False, tweets_loaded=False):
     key = random.choice(list(json_tree.keys()))
     tweet += key.split(' ')[0] + ' '
     sentences = 0
-    while sentences < length:
+    while sentences < length and len(tweet) < length*120:
         tweet += key.split(' ')[1] + ' '
         try:
             value = random.choice(json_tree[key])
