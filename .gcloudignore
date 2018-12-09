@@ -18,5 +18,4 @@ node_modules
 __pycache__
 *.csv
 README.md
-requirements.txt
 scraping
