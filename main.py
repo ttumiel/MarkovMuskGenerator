@@ -16,8 +16,7 @@ def tweet_http(request):
     """
     if request.method == 'OPTIONS':
         headers = {
-            'Access-Control-Allow-Origin': ['https://maybemusk.com',
-                                            'https://www.maybemusk.com'],
+            'Access-Control-Allow-Origin': 'https://maybemusk.com',
             'Access-Control-Allow-Methods': ['GET','POST'],
             'Access-Control-Allow-Headers': 'Content-Type',
             'Access-Control-Max-Age': '3600'
@@ -28,8 +27,7 @@ def tweet_http(request):
     # Set CORS headers for the main request
     # Change to website when complete
     headers = {
-        'Access-Control-Allow-Origin': ['https://maybemusk.com',
-                                        'https://www.maybemusk.com']
+        'Access-Control-Allow-Origin': 'https://maybemusk.com'
     }
 
     request_json = request.get_json(silent=True)
