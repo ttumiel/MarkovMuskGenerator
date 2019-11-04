@@ -1,4 +1,6 @@
-# Serverless Random Tweet Generator Cloud Function
+# Serverless Markov Chain Random Tweet Generator Cloud Function
+
+Synthesize random tweets via Markov chain trained on existing Musk tweets. Deploys to a Google cloud function to generate these tweets via http requests.
 
 ## Deploy
 
