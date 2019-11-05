@@ -2,6 +2,19 @@
 
 Synthesize random tweets via Markov chain trained on existing Musk tweets. Deploys to a Google cloud function to generate these tweets via http requests.
 
+[Visit the Demo Site](https://maybemusk.com/)
+
+## Examples
+
+> Sanctimonious journalists who appoint themselves protectors of the undead or your money back!
+
+> Want Pravda to exist, write an article telling your readers to vote against it … 310 miles. Takes 0-60mph to 4.5 sec & top speed leaders over to pure electric.
+
+> 2D streets and 3D buildings means bad traffic forever. Unless there is risk of climate science.
+
+> Awesome non-linearities, such as tweeting on Ambien isn't wise.
+
+
 ## Deploy
 
 ```sh
